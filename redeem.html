@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>KLAPI - Redeem</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+
+    <style>
+        body {
+            font-family: "Roboto";
+            font-size: 14px;
+            padding: 0;
+        }
+
+        .mermaid svg {
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .mermaid * {
+            font-family: "Roboto" !important;
+        }
+
+        svg {
+            overflow: auto !important;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+    </style>
+
+</head>
+<body>
+<div class="mermaid"></div>
+
+<script>
+  mermaid.initialize({
+    startOnLoad: true
+  });
+</script>
+
+<script>
+  const mermaid = document.querySelector('.mermaid');
+
+  mermaid.innerHTML = `
+sequenceDiagram
+    participant SG API
+    participant NG API
+    participant TC API
+    participant KL API
+    actor Frontend
+    participant GameStopPage@{ "type" : "collections" }
+    participant ReceiptPage@{ "type" : "collections" }
+    participant SuccessPage@{ "type" : "collections" }
+    participant AlreadyRedeemedPage@{ "type" : "collections" }
+    participant ErrorPage@{ "type" : "collections" }
+    participant ErrorPopup@{ "type" : "collections" }
+
+    Frontend ->> KL API: Request data
+    KL API ->> TC API: Request data
+    TC API ->> NG API: Request data
+    
+    NG API ->> SG API: Request data
+    
+    SG API -->> NG API: 200 / Coupon info
+    SG API --x NG API: (SG API timeout)
+    
+    NG API -->> TC API: 409 / Error message (Game stop)
+    NG API -->> TC API: 200 / Coupon Info
+    NG API -->> TC API: 503 / Error message (SG API timeout)
+    NG API --x TC API: (NG API timeout)
+    
+    TC API -->> KL API: 500 / Error message (Game stop)
+    TC API -->> KL API: 200 / Coupon ID
+    TC API -->> KL API: 200 / - (SG API timeout)
+    TC API -->> KL API: 200 / Already redeemed
+    TC API -->> KL API: ? / Award not found
+    TC API -->> KL API: (NG API timeout) ???
+    TC API --x KL API: (TC API timeout)
+    
+    KL API -->> Frontend: 200 / Error message (Game stop)
+    KL API -->> Frontend: 200 / Coupon ID
+    KL API -->> Frontend: 200 / - (SG API timeout)
+    KL API -->> Frontend: 200 / Already redeemed
+    KL API -->> Frontend: 404 / Award not found
+    KL API -->> Frontend: 500 / - (Unknown error)
+    KL API --x Frontend: (KL API timeout)
+    
+    Frontend -->> GameStopPage: Error message (Game stop)
+    Frontend -->> ReceiptPage: Coupon ID
+    Frontend -->> SuccessPage: - (SG API timeout)
+    Frontend -->> AlreadyRedeemedPage: Already redeemed
+    Frontend -->> ErrorPage: Award not found
+    Frontend -->> ErrorPopup: - (Unknown error)
+    Frontend -->> ErrorPopup: (KL API timeout)
+    ErrorPopup ->> Frontend: Retry
+
+    # ReceiptPage ->> NG API: Request data
+    # NG API -->> ReceiptPage: Coupon info
+
+`;
+
+</script>
+
+</body>
+</html>
