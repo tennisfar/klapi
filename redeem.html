@@ -10,31 +10,51 @@
     <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
 
     <style>
+        html,
         body {
             font-family: "Roboto";
             font-size: 14px;
             padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+
+        h1 {
+            position: absolute;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            height: 30px;
+            margin: 0;
+            padding: 5px 0 0 5px;
+            font-size: 20px;
+        }
+
+        .mermaid {
+            position: absolute;
+            z-index: 2;
+            inset: 10px;
+            margin: 0 !important;
+            padding: 0 !important;
+            width: calc(100vw - 20px) !important;
+            height: calc(100vh - 20px) !important;
         }
 
         .mermaid svg {
-            width: 100vw;
-            height: 100vh;
+            max-height: 100% !important;
         }
 
         .mermaid * {
             font-family: "Roboto" !important;
         }
 
-        svg {
-            overflow: auto !important;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
     </style>
 
 </head>
 <body>
+<h1>KLAPI Redeem</h1>
 <div class="mermaid"></div>
 
 <script>
