@@ -83,7 +83,6 @@ sequenceDiagram
     Frontend ->> KL API: Request data
     KL API ->> TC API: Request data
     TC API ->> NG API: Request data
-    
     NG API ->> SG API: Request data
     
     SG API -->> NG API: 200 / Coupon info
@@ -98,7 +97,8 @@ sequenceDiagram
     TC API -->> KL API: 200 / Coupon ID
     TC API -->> KL API: 200 / - (SG API timeout)
     TC API -->> KL API: 200 / Already redeemed
-    TC API -->> KL API: ? / Award not found
+    TC API -->> KL API: 404 / Award not found
+    TC API -->> KL API: 504 / (Gateway timeout)
     TC API -->> KL API: (NG API timeout) ???
     TC API --x KL API: (TC API timeout)
     
@@ -108,6 +108,7 @@ sequenceDiagram
     KL API -->> Frontend: 200 / Already redeemed
     KL API -->> Frontend: 404 / Award not found
     KL API -->> Frontend: 500 / - (Unknown error)
+    KL API -->> Frontend: null / - (Gateway timeout)
     KL API --x Frontend: (KL API timeout)
     
     Frontend -->> GameStopPage: Error message (Game stop)
