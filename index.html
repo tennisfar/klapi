@@ -5,8 +5,42 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>KLAPI</title>
+    <link rel="icon" type="image/svg+xml" href="https://danskespil.dk/favicon.ico">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <style>
+        body {
+            font-family: "Roboto", sans-serif;
+            margin: 40px;
+            background-color: #f4f4f4;
+        }
+
+        .pages {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-width: 400px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        a:hover {
+            background-color: #eaeaea;
+            color: #000;
+        }
+    </style>
 </head>
 <body>
-<a href="redeem.html">Redeem API</a>
+<div class="pages">
+    <a href="redeem.html">Redeem</a>
+</div>
 </body>
 </html>
