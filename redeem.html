@@ -108,7 +108,7 @@ sequenceDiagram
     KL API -->> Frontend: 200 / Already redeemed
     KL API -->> Frontend: 404 / Award not found
     KL API -->> Frontend: 500 / - (Unknown error)
-    KL API -->> Frontend: null / - (Gateway timeout)
+    KL API -->> Frontend: null (Gateway timeout)
     KL API --x Frontend: (KL API timeout)
     
     Frontend -->> GameStopPage: Error message (Game stop)
