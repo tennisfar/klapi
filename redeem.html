@@ -4,69 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>KLAPI - Redeem</title>
+    <title>Klub Lotto - Redeem</title>
     <link rel="icon" type="image/svg+xml" href="https://danskespil.dk/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
-
-    <style>
-        html,
-        body {
-            font-family: "Roboto";
-            font-size: 14px;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            justify-content: flex-start;
-            align-items: flex-start;
-        }
-
-        h1 {
-            position: absolute;
-            z-index: 1;
-            top: 0;
-            left: 0;
-            height: 30px;
-            margin: 0;
-            padding: 5px 0 0 5px;
-            font-size: 20px;
-        }
-
-        .mermaid {
-            position: absolute;
-            z-index: 2;
-            inset: 10px;
-            margin: 0 !important;
-            padding: 0 !important;
-            width: calc(100vw - 20px) !important;
-            height: calc(100vh - 20px) !important;
-        }
-
-        .mermaid svg {
-            max-height: 100% !important;
-        }
-
-        .mermaid * {
-            font-family: "Roboto" !important;
-        }
-
-    </style>
-
+    <link rel="stylesheet" href="mermaid.css">
 </head>
 <body>
-<h1>KLAPI Redeem</h1>
+<div class="title">Klub Lotto - Redeem</div>
+<div class="version">Vers. 20251023.1</div>
 <div class="mermaid"></div>
 
-<script>
-  mermaid.initialize({
-    startOnLoad: true
-  });
-</script>
-
-<script>
-  const mermaid = document.querySelector('.mermaid');
-
-  mermaid.innerHTML = `
+<script type="text/javascript">
+  const el = document.querySelector('.mermaid');
+  el.innerHTML = `
 sequenceDiagram
     participant SG API
     participant NG API
@@ -119,12 +69,17 @@ sequenceDiagram
     Frontend -->> ErrorPopup: - (Unknown error)
     Frontend -->> ErrorPopup: (KL API timeout)
     ErrorPopup ->> Frontend: Retry
-
-    # ReceiptPage ->> NG API: Request data
-    # NG API -->> ReceiptPage: Coupon info
+    
+    ReceiptPage ->> NG API: Request data / Coupon ID
+    NG API -->> ReceiptPage: 200 / Coupon info
 
 `;
+</script>
 
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+
+  mermaid.initialize({ startOnLoad: true });
 </script>
 
 </body>
