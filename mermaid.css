@@ -11,19 +11,19 @@ body {
 
 .title,
 .version {
-    color: #474750;
-    font-size: 16px;
+    color: #2a2a2e;
+    font-size: 14px;
     position: absolute;
     display: inline-block;
     z-index: 1;
-    top: 34px;
+    top: 5px;
     left: 5px;
     padding: 5px 7px;
 }
 
 .version {
-    font-size: 11px;
-    top: 56px;
+    font-size: 10px;
+    top: 22px;
 }
 
 .home {
@@ -31,7 +31,7 @@ body {
     position: absolute;
     display: inline-block;
     z-index: 10;
-    top: 5px;
+    bottom: 5px;
     left: 5px;
     padding: 5px;
 }
